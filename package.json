@@ -37,5 +37,10 @@
 		"vite": "^5.0.3",
 		"vitest": "^1.0.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@fontsource-variable/antonio": "^5.0.18",
+		"@fontsource-variable/league-spartan": "^5.0.18",
+		"reset-css": "^5.0.2"
+	}
 }
