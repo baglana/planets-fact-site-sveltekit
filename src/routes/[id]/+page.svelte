@@ -24,6 +24,8 @@
 	import GeologySaturn from '$lib/images/geology-saturn.png';
 	import GeologyUranus from '$lib/images/geology-uranus.png';
 	import GeologyVenus from '$lib/images/geology-venus.png';
+	import Stat from '$lib/components/Prop.svelte';
+	import Prop from '$lib/components/Prop.svelte';
 
 	type PlanetImages = {
 		overview: string;
@@ -99,72 +101,96 @@
 <!--	<div-->
 <!--		class="md:max-w-[1110px] w-full mx-auto flex md:flex-row md:justify-end md:items-center md:gap-[300px] md:pt-32 text-white sm:pt-12 sm:gap-9 sm:items-center sm:flex-col"-->
 <!--	>-->
+<main>
 <div class="layout text-white">
 	<div class="tabs px-6">
 <!--			<div class="md:max-w-[1110px] w-full mx-auto md:flex md:flex-col md:gap-20 px-6">-->
-			<button class={`${activeTab === 'overview' ? 'active-tab' : ''}`}
-							on:click={() => setActiveTab('overview')}
-			>
-				<span>
-					Overview
-				</span>
-			</button>
-			<button class={`${activeTab === 'structure' ? 'active-tab' : ''}`}
-							on:click={() => setActiveTab('structure')}
-			>
-				<span>
-					Structure
-				</span>
-			</button>
-			<button class={`${activeTab === 'surface' ? 'active-tab' : ''}`}
-							on:click={() => setActiveTab('surface')}
-			>
-				<span>
-					Surface
-				</span>
-			</button>
+		<button class={`${activeTab === 'overview' ? 'active-tab' : ''}`}
+						on:click={() => setActiveTab('overview')}
+		>
+			<span>
+				Overview
+			</span>
+		</button>
+		<button class={`${activeTab === 'structure' ? 'active-tab' : ''}`}
+						on:click={() => setActiveTab('structure')}
+		>
+			<span>
+				Structure
+			</span>
+		</button>
+		<button class={`${activeTab === 'surface' ? 'active-tab' : ''}`}
+						on:click={() => setActiveTab('surface')}
+		>
+			<span>
+				Surface
+			</span>
+		</button>
 <!--		</div>-->
+</div>
+<div class="image relative">
+		{#if activeTab === 'geology'}
+			<img
+				class=""
+				src={img[data.planet.id]['overview']}
+				alt={`planet - ${data.planet.name} - Geology`}
+			/>
+			<img
+				class="w-[169px] h-[199px] absolute bottom-[-70px] left-1/2 transform -translate-x-1/2"
+				src={img[data.planet.id][activeTab]}
+				alt={`planet - ${data.planet.name} - Geology`}
+			/>
+		{:else}
+			<img
+				class=""
+				src={img[data.planet.id][activeTab]}
+				alt={`planet - ${data.planet.name} - ${activeTab}`}
+			/>
+		{/if}
 	</div>
-	<div class="image relative">
-			{#if activeTab === 'geology'}
-				<img
-					class=""
-					src={img[data.planet.id]['overview']}
-					alt={`planet - ${data.planet.name} - Geology`}
-				/>
-				<img
-					class="w-[169px] h-[199px] absolute bottom-[-70px] left-1/2 transform -translate-x-1/2"
-					src={img[data.planet.id][activeTab]}
-					alt={`planet - ${data.planet.name} - Geology`}
-				/>
-			{:else}
-				<img
-					class=""
-					src={img[data.planet.id][activeTab]}
-					alt={`planet - ${data.planet.name} - ${activeTab}`}
-				/>
-			{/if}
-		</div>
 <!--		<div-->
 <!--			class="md:max-w-[350px] w-full flex md:flex-col md:gap-10 sm:max-w-full sm:flex-row sm:items-center sm:gap-[69px]"-->
 <!--		>-->
-		<div class="description px-6 flex flex-col min-h-[155px] sm:max-w-[339px]">
-			<h1 class="font-['Antonio'] text-[80px] uppercase">{data.planet.name}</h1>
+	<div class="description px-6 flex flex-col min-h-[155px] sm:max-w-[339px]">
+		<h1 class="font-['Antonio'] text-[80px] uppercase">{data.planet.name}</h1>
 
-			<p class="text-sm leading-6">{data.planet[`${activeTab}`].content}</p>
+		<p class="text-sm leading-6">{data.planet[`${activeTab}`].content}</p>
 
-			<p class="">
-				Source :
-				<a class="" href={data.planet[`${activeTab}`].source} target="_blank">
-					<span class="tracking-wider font-normal underline">Wikipedia</span>
-					<i class=""></i>
-				</a>
-			</p>
-		</div>
-<!--		</div>-->
+		<p class="">
+			Source :
+			<a class="" href={data.planet[`${activeTab}`].source} target="_blank">
+				<span class="tracking-wider font-normal underline">Wikipedia</span>
+				<i class=""></i>
+			</a>
+		</p>
 	</div>
+<!--		</div>-->
+</div>
+
+<ul class="props text-white">
+	<li><Prop name={'Rotation Time'} value={'0.99 Days'} /></li>
+	<li><Prop name={'Revolution Time'} value={'365.26 Days'} /></li>
+	<li><Prop name={'Radius'} value={'6,371 KM'} /></li>
+	<li><Prop name={'Average Temp.'} value={'16°c'} /></li>
+</ul>
+
+</main>
 
 <style>
+		.props {
+        display: grid;
+				grid-auto-rows: auto;
+				gap: 0.5rem;
+
+        margin-top: 1.75rem;
+				padding-left: 1.5rem;
+				padding-right: 1.5rem;
+		}
+
+		main {
+        padding-bottom: 2.94rem;
+		}
+
 		.tabs {
         display: grid;
 				grid-template-columns: repeat(3, 1fr);
@@ -297,8 +323,7 @@
 				}
     }
 
-	.tabs {
-		& .active-tab {
+		.tabs .active-tab {
 				opacity: 1;
 				border-bottom: 4px solid #419EBB;
 
@@ -306,5 +331,4 @@
 					background-color: #419ebb;
 				}
 		}
-	}
 </style>
