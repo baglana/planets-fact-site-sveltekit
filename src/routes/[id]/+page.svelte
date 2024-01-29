@@ -24,7 +24,6 @@
 	import GeologySaturn from '$lib/images/geology-saturn.png';
 	import GeologyUranus from '$lib/images/geology-uranus.png';
 	import GeologyVenus from '$lib/images/geology-venus.png';
-	import Stat from '$lib/components/Prop.svelte';
 	import Prop from '$lib/components/Prop.svelte';
 
 	type PlanetImages = {
@@ -34,8 +33,7 @@
 	};
 
 	type PlanetImagesObject = {
-		[key in
-			| 'earth'
+		[key in | 'earth'
 			| 'jupiter'
 			| 'mars'
 			| 'mercury'
@@ -102,118 +100,136 @@
 <!--		class="md:max-w-[1110px] w-full mx-auto flex md:flex-row md:justify-end md:items-center md:gap-[300px] md:pt-32 text-white sm:pt-12 sm:gap-9 sm:items-center sm:flex-col"-->
 <!--	>-->
 <main>
-<div class="layout text-white">
-	<div class="tabs px-6">
-<!--			<div class="md:max-w-[1110px] w-full mx-auto md:flex md:flex-col md:gap-20 px-6">-->
-		<button class={`${activeTab === 'overview' ? 'active-tab' : ''}`}
-						on:click={() => setActiveTab('overview')}
-		>
+	<div class="layout text-white">
+		<div class="tabs px-6">
+			<!--			<div class="md:max-w-[1110px] w-full mx-auto md:flex md:flex-col md:gap-20 px-6">-->
+			<button class={`${activeTab === 'overview' ? 'active-tab' : ''}`}
+							on:click={() => setActiveTab('overview')}
+			>
 			<span>
 				Overview
 			</span>
-		</button>
-		<button class={`${activeTab === 'structure' ? 'active-tab' : ''}`}
-						on:click={() => setActiveTab('structure')}
-		>
+			</button>
+			<button class={`${activeTab === 'structure' ? 'active-tab' : ''}`}
+							on:click={() => setActiveTab('structure')}
+			>
 			<span>
 				Structure
 			</span>
-		</button>
-		<button class={`${activeTab === 'surface' ? 'active-tab' : ''}`}
-						on:click={() => setActiveTab('surface')}
-		>
+			</button>
+			<button class={`${activeTab === 'surface' ? 'active-tab' : ''}`}
+							on:click={() => setActiveTab('surface')}
+			>
 			<span>
 				Surface
 			</span>
-		</button>
-<!--		</div>-->
-</div>
-<div class="image relative">
-		{#if activeTab === 'geology'}
-			<img
-				class=""
-				src={img[data.planet.id]['overview']}
-				alt={`planet - ${data.planet.name} - Geology`}
-			/>
-			<img
-				class="w-[169px] h-[199px] absolute bottom-[-70px] left-1/2 transform -translate-x-1/2"
-				src={img[data.planet.id][activeTab]}
-				alt={`planet - ${data.planet.name} - Geology`}
-			/>
-		{:else}
-			<img
-				class=""
-				src={img[data.planet.id][activeTab]}
-				alt={`planet - ${data.planet.name} - ${activeTab}`}
-			/>
-		{/if}
+			</button>
+			<!--		</div>-->
+		</div>
+		<div class="image relative">
+			{#if activeTab === 'geology'}
+				<img
+					class=""
+					src={img[data.planet.id]['overview']}
+					alt={`planet - ${data.planet.name} - Geology`}
+				/>
+				<img
+					class="w-[169px] h-[199px] absolute bottom-[-70px] left-1/2 transform -translate-x-1/2"
+					src={img[data.planet.id][activeTab]}
+					alt={`planet - ${data.planet.name} - Geology`}
+				/>
+			{:else}
+				<img
+					class=""
+					src={img[data.planet.id][activeTab]}
+					alt={`planet - ${data.planet.name} - ${activeTab}`}
+				/>
+			{/if}
+		</div>
+		<!--		<div-->
+		<!--			class="md:max-w-[350px] w-full flex md:flex-col md:gap-10 sm:max-w-full sm:flex-row sm:items-center sm:gap-[69px]"-->
+		<!--		>-->
+		<div class="description px-6 flex flex-col min-h-[155px] sm:max-w-[339px]">
+			<h1 class="font-['Antonio'] text-[80px] uppercase">{data.planet.name}</h1>
+
+			<p class="text-sm leading-6">{data.planet[`${activeTab}`].content}</p>
+
+			<p class="">
+				Source :
+				<a class="" href={data.planet[`${activeTab}`].source} target="_blank">
+					<span class="tracking-wider font-normal underline">Wikipedia</span>
+					<i class=""></i>
+				</a>
+			</p>
+		</div>
+		<!--		</div>-->
 	</div>
-<!--		<div-->
-<!--			class="md:max-w-[350px] w-full flex md:flex-col md:gap-10 sm:max-w-full sm:flex-row sm:items-center sm:gap-[69px]"-->
-<!--		>-->
-	<div class="description px-6 flex flex-col min-h-[155px] sm:max-w-[339px]">
-		<h1 class="font-['Antonio'] text-[80px] uppercase">{data.planet.name}</h1>
 
-		<p class="text-sm leading-6">{data.planet[`${activeTab}`].content}</p>
-
-		<p class="">
-			Source :
-			<a class="" href={data.planet[`${activeTab}`].source} target="_blank">
-				<span class="tracking-wider font-normal underline">Wikipedia</span>
-				<i class=""></i>
-			</a>
-		</p>
-	</div>
-<!--		</div>-->
-</div>
-
-<ul class="props text-white">
-	<li><Prop name={'Rotation Time'} value={'0.99 Days'} /></li>
-	<li><Prop name={'Revolution Time'} value={'365.26 Days'} /></li>
-	<li><Prop name={'Radius'} value={'6,371 KM'} /></li>
-	<li><Prop name={'Average Temp.'} value={'16°c'} /></li>
-</ul>
+	<ul class="props text-white">
+		<li>
+			<Prop name={'Rotation Time'} value={'0.99 Days'} />
+		</li>
+		<li>
+			<Prop name={'Revolution Time'} value={'365.26 Days'} />
+		</li>
+		<li>
+			<Prop name={'Radius'} value={'6,371 KM'} />
+		</li>
+		<li>
+			<Prop name={'Average Temp.'} value={'16°c'} />
+		</li>
+	</ul>
 
 </main>
 
 <style>
-		.props {
+    .props {
         display: grid;
-				grid-auto-rows: auto;
-				gap: 0.5rem;
+        grid-auto-rows: auto;
+        gap: 0.5rem;
 
         margin-top: 1.75rem;
-				padding-left: 1.5rem;
-				padding-right: 1.5rem;
-		}
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
 
-		main {
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.69rem;
+
+            margin-top: 1.69rem;
+            padding-left: 2.44rem;
+            padding-right: 2.5rem;
+        }
+    }
+
+    main {
         padding-bottom: 2.94rem;
-		}
+    }
 
-		.tabs {
+    .tabs {
         display: grid;
-				grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr);
 
-				border-top: 1px solid hsla(0, 0%, 100%, 0.2);
-				border-bottom: 1px solid hsla(0, 0%, 100%, 0.2);
+        border-top: 1px solid hsla(0, 0%, 100%, 0.2);
+        border-bottom: 1px solid hsla(0, 0%, 100%, 0.2);
 
-				& button {
-						height: 3.12rem;
+        & button {
+            height: 3.12rem;
             width: 5rem;
             padding-top: 1.25rem;
             padding-bottom: 1.06rem;
-						margin-bottom: -0.0625rem;
+            margin-bottom: -0.0625rem;
             border-bottom: 4px solid transparent;
 
-						&:nth-child(2) {
-								justify-self: center;
-						}
-						&:nth-child(3) {
-								justify-self: end;
-						}
+            &:nth-child(2) {
+                justify-self: center;
+            }
 
-						opacity: 0.5;
+            &:nth-child(3) {
+                justify-self: end;
+            }
+
+            opacity: 0.5;
             color: #FFF;
             font-family: "League Spartan Variable", sans-serif;
             font-size: 0.75rem;
@@ -222,34 +238,34 @@
             line-height: normal;
             letter-spacing: 0.16069rem;
             text-transform: uppercase;
-				}
-		}
+        }
+    }
 
-		.layout {
-				display: grid;
-				grid-template-rows: auto auto auto;
+    .layout {
+        display: grid;
+        grid-template-rows: auto auto auto;
 
-				& > div {
-						border: 1px solid red;
-				}
-		}
+        & > div {
+            border: 1px solid red;
+        }
+    }
 
     .image {
         justify-self: center;
-				width: 100%;
-				height: 19rem;
-				display: grid;
-				place-content: center;
+        width: 100%;
+        height: 19rem;
+        display: grid;
+        place-content: center;
 
-				& img {
-						transform: scale(calc(111 / 290));
-				}
+        & img {
+            transform: scale(calc(111 / 290));
+        }
     }
 
-		.description {
-				text-align: center;
+    .description {
+        text-align: center;
 
-				& h1 {
+        & h1 {
             color: #FFF;
             font-family: 'Antonio Variable', sans-serif;
             font-size: 2.5rem;
@@ -257,78 +273,78 @@
             font-weight: 400;
             line-height: normal;
             text-transform: uppercase;
-				}
+        }
 
-				& > p {
-						margin-top: 1rem;
+        & > p {
+            margin-top: 1rem;
             color: #FFF;
             font-family: 'League Spartan Variable', sans-serif;
             font-size: 0.95rem;
             font-style: normal;
             font-weight: 100;
             line-height: 1.5625rem; /* 178.571% */
-				}
+        }
 
         & > p:nth-of-type(2) {
             opacity: 0.5;
 
-						& i {
+            & i {
                 display: inline-block;
                 width: 0.75rem;
                 height: 0.75rem;
-								margin-bottom: -0.2rem;
+                margin-bottom: -0.2rem;
                 background: url('$lib/images/assets/icon-source.svg');
                 background-repeat: no-repeat;
                 background-size: cover; /* stretch the background to cover the whole element */
-								color: hsla(0, 0%, 100%, 1);
+                color: hsla(0, 0%, 100%, 1);
             }
-				}
-		}
+        }
+    }
 
 
     @media (min-width: 768px) {
-				.layout {
-					grid-template: auto auto / 1fr 1fr;
-					grid-template-areas:
+        .layout {
+            grid-template: auto auto / 1fr 1fr;
+            grid-template-areas:
 									"image image"
 									"desc tabs";
-					justify-items: center;
+            justify-items: center;
 
-				}
+        }
 
-				.image {
-						grid-area: image;
-				}
+        .image {
+            grid-area: image;
+        }
 
-				.description {
-						grid-area: desc;
-				}
+        .description {
+            grid-area: desc;
+        }
 
-				.tabs {
-						grid-area: tabs;
-				}
-		}
+        .tabs {
+            grid-area: tabs;
+        }
+    }
 
     @media (min-width: 1440px) {
-				.layout {
+        .layout {
             grid-template: auto auto / auto auto;
             grid-template-areas:
 										"image desc"
 										"image tabs";
-						align-items: flex-end;
+            align-items: flex-end;
         }
 
-				.image {
-						align-self: center;
-				}
+        .image {
+            align-self: center;
+        }
     }
 
-		.tabs .active-tab {
-				opacity: 1;
-				border-bottom: 4px solid #419EBB;
+    .tabs .active-tab {
+        opacity: 1;
+        border-bottom: 4px solid #419EBB;
 
-				@media (min-width: 768px) {
-					background-color: #419ebb;
-				}
-		}
+        @media (min-width: 768px) {
+            background-color: #419ebb;
+        }
+    }
 </style>
