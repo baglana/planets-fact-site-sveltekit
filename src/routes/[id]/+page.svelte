@@ -192,7 +192,7 @@
         padding-left: 1.5rem;
         padding-right: 1.5rem;
 
-        @media (min-width: 768px) {
+        @media (min-width: 48rem) {
             grid-template-columns: repeat(4, 1fr);
             gap: 0.69rem;
 
@@ -200,10 +200,24 @@
             padding-left: 2.44rem;
             padding-right: 2.5rem;
         }
+
+        @media (min-width: 90rem) {
+            gap: 1.88rem;
+
+            margin-top: 5.44rem;
+            padding: 0 10.31rem;
+        }
     }
 
     main {
         padding-bottom: 2.94rem;
+
+        @media (min-width: 48rem) {
+            padding-bottom: 2.25rem;
+        }
+        @media (min-width: 90rem) {
+            padding-bottom: 3.5rem;
+        }
     }
 
     .tabs {

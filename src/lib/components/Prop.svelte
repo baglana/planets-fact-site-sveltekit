@@ -44,7 +44,7 @@
         text-transform: uppercase;
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 48rem) {
         div {
             padding: 1rem 0.94rem 1.19rem;
 
@@ -70,6 +70,26 @@
             line-height: normal;
             letter-spacing: -0.05625rem;
             text-transform: uppercase;
+        }
+    }
+
+    @media (min-width: 90rem) {
+        div {
+            padding: 1.25rem 1.44rem 1.69rem;
+            grid-gap: 0.25rem;
+        }
+
+        p {
+            font-size: 0.875rem;
+            font-style: normal;
+            line-height: 1.5625rem; /* 227.273% */
+            letter-spacing: 0.0625rem;
+            text-transform: uppercase;
+        }
+
+        span {
+            font-size: 2.5rem;
+            letter-spacing: -0.09375rem;
         }
     }
 </style>
