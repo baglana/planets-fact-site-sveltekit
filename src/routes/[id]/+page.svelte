@@ -101,8 +101,7 @@
 <!--	>-->
 <main>
 	<div class="layout text-white">
-		<div class="tabs px-6">
-			<!--			<div class="md:max-w-[1110px] w-full mx-auto md:flex md:flex-col md:gap-20 px-6">-->
+		<div class="tabs">
 			<button class={`${activeTab === 'overview' ? 'active-tab' : ''}`}
 							on:click={() => setActiveTab('overview')}
 			>
@@ -146,10 +145,7 @@
 				/>
 			{/if}
 		</div>
-		<!--		<div-->
-		<!--			class="md:max-w-[350px] w-full flex md:flex-col md:gap-10 sm:max-w-full sm:flex-row sm:items-center sm:gap-[69px]"-->
-		<!--		>-->
-		<div class="description px-6 flex flex-col min-h-[155px] sm:max-w-[339px]">
+		<div class="description flex flex-col min-h-[155px]">
 			<h1 class="font-['Antonio'] text-[80px] uppercase">{data.planet.name}</h1>
 
 			<p class="text-sm leading-6">{data.planet[`${activeTab}`].content}</p>
@@ -162,7 +158,6 @@
 				</a>
 			</p>
 		</div>
-		<!--		</div>-->
 	</div>
 
 	<ul class="props text-white">
@@ -180,6 +175,7 @@
 		</li>
 	</ul>
 
+
 </main>
 
 <style>
@@ -195,7 +191,6 @@
         @media (min-width: 48rem) {
             grid-template-columns: repeat(4, 1fr);
             gap: 0.69rem;
-
             margin-top: 1.69rem;
             padding-left: 2.44rem;
             padding-right: 2.5rem;
@@ -223,12 +218,27 @@
     .tabs {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+        width: 100%;
 
         border-bottom: 1px solid hsla(0, 0%, 100%, 0.2);
 
+        @media (min-width: 48rem) {
+            grid-template-columns: none;
+            grid-template-rows: repeat(3, 1fr);
+
+            & button {
+                height: 2.5rem;
+                width: 100%;
+            }
+        }
+
+        @media (min-width: 48rem) {
+            max-width: 21.875rem;
+        }
+
         & button {
             height: 3.12rem;
-            width: 5rem;
+            min-width: 5rem;
             padding-top: 1.25rem;
             padding-bottom: 1.06rem;
             margin-bottom: -0.0625rem;
@@ -239,7 +249,7 @@
             }
 
             &:nth-child(3) {
-                justify-self: end;
+                justify-self: center;
             }
 
             opacity: 0.5;
@@ -252,6 +262,7 @@
             letter-spacing: 0.16069rem;
             text-transform: uppercase;
         }
+
     }
 
     .layout {
@@ -259,7 +270,16 @@
         grid-template-rows: auto auto auto;
 
         & > div {
-            border: 1px solid red;
+            /*border: 1px solid red;*/
+        }
+
+        @media (min-width: 48rem) {
+            padding-left: 2.44rem;
+            padding-right: 2.5rem;
+        }
+        @media (min-width: 90rem) {
+            padding-left: 10.31rem;
+            padding-right: 10.31rem;
         }
     }
 
@@ -273,10 +293,35 @@
         & img {
             transform: scale(calc(111 / 290));
         }
+
+        @media (min-width: 48rem) {
+            height: 28.75rem;
+        }
     }
 
     .description {
         text-align: center;
+
+        @media (min-width: 48rem) {
+            max-width: 21.875rem;
+
+            & h1 {
+                color: #FFF;
+                font-size: 5rem;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                text-transform: uppercase;
+            }
+
+            & p {
+                color: #FFF;
+                font-size: 0.875rem;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.5625rem; /* 178.571% */
+            }
+        }
 
         & h1 {
             color: #FFF;
