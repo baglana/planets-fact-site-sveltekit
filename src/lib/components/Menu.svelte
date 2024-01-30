@@ -13,7 +13,10 @@
 		isMobileMenuOpen = !isMobileMenuOpen;
 	}
 
-	function handlePlanetClick() {
+	$: activeItem = items[0].id;
+
+	function handleItemClick(selected: string) {
+		activeItem = selected;
 	}
 </script>
 
@@ -28,7 +31,7 @@
 <menu>
 	{#each items as item (item.id)}
 		<li>
-			<a href="/{item.id}">
+			<a href="/{item.id} on:click={handleItemClick(item.id)}">
 				<span></span>
 
 				<p>{item.name}</p>
@@ -97,6 +100,7 @@
             flex-direction: row;
             gap: 2.06rem;
             position: static;
+            padding: 0;
             background-color: hsla(240, 67%, 8%, 1);
         }
 
@@ -105,19 +109,43 @@
         }
 
         a {
+            display: block;
             padding: 0;
-            grid-template-columns: auto;
         }
 
         p {
-            color: #FFF;
-            font-family: 'League Spartan Variable', sans-serif;
+            color: hsla(0, 0%, 100%, 0.75);
             font-size: 1.125rem;
-            font-style: normal;
-            font-weight: 500;
-            line-height: normal;
             letter-spacing: 0.08525rem;
-            text-transform: uppercase;
+        }
+
+        span {
+            display: none;
+        }
+    }
+
+    @media (min-width: 90rem) {
+        menu {
+            background-color: hsla(240, 67%, 8%, 1);
+        }
+
+        li:not(:first-child) {
+            border-top: none;
+        }
+
+        a {
+            padding-top: 1.81rem;
+            padding-bottom: 1.69rem;
+        }
+
+        .active {
+            border-top: 4px solid hsla(222, 87%, 56%, 1);
+        }
+
+        p {
+            font-size: 0.75rem;
+            line-height: 1.5625rem; /* 227.273% */
+            letter-spacing: 0.16069rem;
         }
 
         span {
@@ -125,5 +153,6 @@
         }
 
     }
+
 
 </style>

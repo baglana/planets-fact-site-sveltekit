@@ -39,5 +39,11 @@
             flex-direction: column;
             gap: 2.44rem;
         }
+
+        @media (min-width: 90rem) {
+            padding: 0 2.5rem 0 1.38rem;
+            flex-direction: row;
+            gap: 0;
+        }
     }
 </style>
