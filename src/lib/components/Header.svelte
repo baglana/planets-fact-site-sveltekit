@@ -7,12 +7,13 @@
 		id: string;
 		name: string;
 	}[];
+
 </script>
 
 <header
 	class="max-w-[1440px] w-full mx-auto pl-8 pr-10 pt-5 pb-7 border-b-[1px] border-white border-opacity-20"
 >
-	<a href="/">
+	<a href="/" on:click>
 		<IconLogo />
 	</a>
 

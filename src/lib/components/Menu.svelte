@@ -1,37 +1,46 @@
 <script lang="ts">
-	import IconHamburger from '$lib/components/IconHamburger.svelte';
 	import IconChevron from '$lib/components/IconChevron.svelte';
+	import ButtonHamburger from '$lib/components/ButtonHamburger.svelte';
 
 	export let items: {
 		id: string;
 		name: string;
 	}[];
 
-	let isMobileMenuOpen = false;
+	function handleMenuItemClick(e: Event) {
+		removeActive();
+		const { target } = e;
+		if (target instanceof HTMLAnchorElement) {
+			target.classList.toggle('active');
+			console.log(target.id);
+		}
 
-	function toggleMobileMenu() {
-		isMobileMenuOpen = !isMobileMenuOpen;
+		function removeActive() {
+			const a = document.querySelector('a.active');
+			if (a) {
+				a.removeAttribute('active');
+			}
+		}
 	}
 
-	$: activeItem = items[0].id;
 
-	function handleItemClick(selected: string) {
-		activeItem = selected;
+	let isMobileMenuOpen = false;
+	$: {
+		if (isMobileMenuOpen) {
+			const menu = document.querySelector('menu');
+			if (menu instanceof HTMLMenuElement) {
+				menu.classList.toggle('visible');
+				console.log(menu.classList);
+			}
+		}
 	}
 </script>
 
-<button
-	aria-expanded={isMobileMenuOpen}
-	on:click={toggleMobileMenu}
-	type="button"
->
-	<IconHamburger />
-</button>
-
+<ButtonHamburger show={isMobileMenuOpen} />
 <menu>
 	{#each items as item (item.id)}
 		<li>
-			<a href="/{item.id} on:click={handleItemClick(item.id)}">
+			<a href="/{item.id}" on:click={handleMenuItemClick}>
 				<span></span>
 
 				<p>{item.name}</p>
@@ -43,12 +52,16 @@
 </menu>
 
 <style>
-    button {
-        display: flex;
-        justify-content: center;
+    .active {
+        border-top: 4px solid hsla(222, 87%, 56%, 1);
+    }
+
+    .visible {
+        visibility: visible;
     }
 
     menu {
+        visibility: hidden;
         width: 100%;
         padding: 1.5rem;
         display: flex;
@@ -92,11 +105,8 @@
     }
 
     @media (min-width: 48rem) {
-        button {
-            display: none;
-        }
-
         menu {
+            visibility: visible;
             flex-direction: row;
             gap: 2.06rem;
             position: static;
@@ -115,9 +125,11 @@
 
         p {
             color: hsla(0, 0%, 100%, 0.75);
-            font-size: 1.125rem;
-            letter-spacing: 0.08525rem;
+            font-size: 0.75rem;
+            line-height: 1.5625rem; /* 227.273% */
+            letter-spacing: 0.16069rem;
         }
+
 
         span {
             display: none;
@@ -138,21 +150,9 @@
             padding-bottom: 1.69rem;
         }
 
-        .active {
-            border-top: 4px solid hsla(222, 87%, 56%, 1);
-        }
-
-        p {
-            font-size: 0.75rem;
-            line-height: 1.5625rem; /* 227.273% */
-            letter-spacing: 0.16069rem;
-        }
-
         span {
             display: none;
         }
 
     }
-
-
 </style>

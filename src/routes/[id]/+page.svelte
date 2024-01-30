@@ -32,6 +32,8 @@
 		geology: string;
 	};
 
+	export let data: PageData;
+
 	type PlanetImagesObject = {
 		[key in | 'earth'
 			| 'jupiter'
@@ -91,8 +93,6 @@
 	function setActiveTab(tab: string) {
 		activeTab = tab;
 	}
-
-	export let data: PageData;
 
 </script>
 
