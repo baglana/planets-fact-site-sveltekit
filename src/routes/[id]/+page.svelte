@@ -224,7 +224,6 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
 
-        border-top: 1px solid hsla(0, 0%, 100%, 0.2);
         border-bottom: 1px solid hsla(0, 0%, 100%, 0.2);
 
         & button {
