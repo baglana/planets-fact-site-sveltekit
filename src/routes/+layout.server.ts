@@ -8,5 +8,7 @@ export const load: LayoutServerLoad = async ({ fetch }) => {
 	// return { planets: json.data };
 	const data = await getPlanets();
 
+	// console.log(data);
+
 	return data;
 };

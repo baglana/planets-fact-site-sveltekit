@@ -88,7 +88,7 @@
 		}
 	};
 
-	let activeTab = 'overview';
+	let activeTab: 'overview' | 'structure' | 'surface' = 'overview';
 
 	function setActiveTab(tab: string) {
 		activeTab = tab;
@@ -129,30 +129,30 @@
 			{#if activeTab === 'geology'}
 				<img
 					class=""
-					src={img[data.planet.id]['overview']}
-					alt={`planet - ${data.planet.name} - Geology`}
+					src={img[data.planets.id]['overview']}
+					alt={`planet - ${data.planets.name} - Geology`}
 				/>
 				<img
 					class="w-[169px] h-[199px] absolute bottom-[-70px] left-1/2 transform -translate-x-1/2"
-					src={img[data.planet.id][activeTab]}
-					alt={`planet - ${data.planet.name} - Geology`}
+					src={img[data.planets.id][activeTab]}
+					alt={`planet - ${data.planets.name} - Geology`}
 				/>
 			{:else}
-				<img
-					class=""
-					src={img[data.planet.id][activeTab]}
-					alt={`planet - ${data.planet.name} - ${activeTab}`}
-				/>
+				<!--				<img-->
+				<!--					class=""-->
+				<!--					src={img[data.planets.id][activeTab]}-->
+				<!--					alt={`planet - ${data.planets.name} - ${activeTab}`}-->
+				<!--				/>-->
 			{/if}
 		</div>
 		<div class="description flex flex-col min-h-[155px]">
-			<h1 class="font-['Antonio'] text-[80px] uppercase">{data.planet.name}</h1>
+			<h1 class="font-['Antonio'] text-[80px] uppercase">{data.planets.name}</h1>
 
-			<p class="text-sm leading-6">{data.planet[`${activeTab}`].content}</p>
+			<p class="text-sm leading-6">{data.planets[activeTab].content}</p>
 
 			<p class="">
 				Source :
-				<a class="" href={data.planet[`${activeTab}`].source} target="_blank">
+				<a class="" href={data.planets[{activeTab}].source} target="_blank">
 					<span class="tracking-wider font-normal underline">Wikipedia</span>
 					<i class=""></i>
 				</a>

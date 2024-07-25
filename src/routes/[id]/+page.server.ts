@@ -10,6 +10,6 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
 	// return { planet: json };
 
 	const data = await getPlanet(+params.id);
-	console.log(data);
-	return { planet: data.planets_by_pk };
+	console.log('+PAGE.SERVER.TS', data);
+	return data.planets_by_pk;
 };

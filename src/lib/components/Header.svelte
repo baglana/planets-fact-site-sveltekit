@@ -4,7 +4,7 @@
 	import Menu from '$lib/components/Menu.svelte';
 
 	export let planets: {
-		id: string;
+		id: number;
 		name: string;
 	}[];
 
